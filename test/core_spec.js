@@ -112,20 +112,14 @@ describe('application logic', () => {
     it('creates a tally for the voted entry', () => {
       expect(
         vote(Map({
-          vote: Map({
-            pair: List.of('Trainspotting', '28 Days Later')
-          }),
-          entries: List()
+          pair: List.of('Trainspotting', '28 Days Later')
         }), 'Trainspotting')
       ).to.equal(
         Map({
-          vote: Map({
-            pair: List.of('Trainspotting', '28 Days Later'),
-            tally: Map({
-              'Trainspotting': 1
-            })
-          }),
-          entries: List()
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 1
+          })
         })
       );
     });
@@ -133,25 +127,19 @@ describe('application logic', () => {
     it('adds to existing tally for the voted entry', () => {
       expect(
         vote(Map({
-          vote: Map({
-            pair: List.of('Trainspotting', '28 Days Later'),
-            tally: Map({
-              'Trainspotting': 3,
-              '28 Days Later': 2
-            })
-          }),
-          entries: List()
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 3,
+            '28 Days Later': 2
+          })
         }), 'Trainspotting')
       ).to.equal(
         Map({
-          vote: Map({
-            pair: List.of('Trainspotting', '28 Days Later'),
-            tally: Map({
-              'Trainspotting': 4,
-              '28 Days Later': 2
-            })
-          }),
-          entries: List()
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 4,
+            '28 Days Later': 2
+          })
         })
       );
     });
