@@ -86,6 +86,25 @@ describe('application logic', () => {
       );
     });
 
+    it('marks winner when just one entry left', () => {
+      expect(
+        next(Map({
+          vote: Map({
+            pair: List.of('Trainspotting', '28 Days Later'),
+            tally: Map({
+              'Trainspotting': 4,
+              '28 Days Later': 2
+            })
+          }),
+          entries: List()
+        }))
+      ).to.equal(
+        Map({
+          winner: 'Trainspotting'
+        })
+      );
+    });
+
   });
 
   describe('vote', () => {
