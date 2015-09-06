@@ -36,6 +36,7 @@ describe('application logic', () => {
       const nextState = next(state);
       expect(nextState).to.equal(Map({
         vote: Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later')
         }),
         entries: List.of('Sunshine')
@@ -46,6 +47,7 @@ describe('application logic', () => {
       expect(
         next(Map({
           vote: Map({
+            round: 1,
             pair: List.of('Trainspotting', '28 Days Later'),
             tally: Map({
               'Trainspotting': 4,
@@ -57,6 +59,7 @@ describe('application logic', () => {
       ).to.equal(
         Map({
           vote: Map({
+            round: 2,
             pair: List.of('Sunshine', 'Millions')
           }),
           entries: List.of('127 Hours', 'Trainspotting')
@@ -68,6 +71,7 @@ describe('application logic', () => {
       expect(
         next(Map({
           vote: Map({
+            round: 1,
             pair: List.of('Trainspotting', '28 Days Later'),
             tally: Map({
               'Trainspotting': 3,
@@ -79,6 +83,7 @@ describe('application logic', () => {
       ).to.equal(
         Map({
           vote: Map({
+            round: 2,
             pair: List.of('Sunshine', 'Millions')
           }),
           entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
@@ -90,6 +95,7 @@ describe('application logic', () => {
       expect(
         next(Map({
           vote: Map({
+            round: 1,
             pair: List.of('Trainspotting', '28 Days Later'),
             tally: Map({
               'Trainspotting': 4,
@@ -112,10 +118,12 @@ describe('application logic', () => {
     it('creates a tally for the voted entry', () => {
       expect(
         vote(Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later')
         }), 'Trainspotting')
       ).to.equal(
         Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later'),
           tally: Map({
             'Trainspotting': 1
@@ -127,6 +135,7 @@ describe('application logic', () => {
     it('adds to existing tally for the voted entry', () => {
       expect(
         vote(Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later'),
           tally: Map({
             'Trainspotting': 3,
@@ -135,6 +144,7 @@ describe('application logic', () => {
         }), 'Trainspotting')
       ).to.equal(
         Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later'),
           tally: Map({
             'Trainspotting': 4,
@@ -147,10 +157,12 @@ describe('application logic', () => {
     it('ignores the vote if for an invalid entry', () => {
       expect(
         vote(Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later')
         }), 'Sunshine')
       ).to.equal(
         Map({
+          round: 1,
           pair: List.of('Trainspotting', '28 Days Later')
         })
       );
