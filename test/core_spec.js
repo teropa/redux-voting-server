@@ -120,13 +120,16 @@ describe('application logic', () => {
         vote(Map({
           round: 1,
           pair: List.of('Trainspotting', '28 Days Later')
-        }), 'Trainspotting')
+        }), 'Trainspotting', 'voter1')
       ).to.equal(
         Map({
           round: 1,
           pair: List.of('Trainspotting', '28 Days Later'),
           tally: Map({
             'Trainspotting': 1
+          }),
+          votes: Map({
+            voter1: 'Trainspotting'
           })
         })
       );
@@ -140,8 +143,9 @@ describe('application logic', () => {
           tally: Map({
             'Trainspotting': 3,
             '28 Days Later': 2
-          })
-        }), 'Trainspotting')
+          }),
+          votes: Map()
+        }), 'Trainspotting', 'voter1')
       ).to.equal(
         Map({
           round: 1,
@@ -149,6 +153,37 @@ describe('application logic', () => {
           tally: Map({
             'Trainspotting': 4,
             '28 Days Later': 2
+          }),
+          votes: Map({
+            voter1: 'Trainspotting'
+          })
+        })
+      );
+    });
+
+    it('nullifies previous vote for the same voter', () => {
+      expect(
+        vote(Map({
+          round: 1,
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 3,
+            '28 Days Later': 2
+          }),
+          votes: Map({
+            voter1: '28 Days Later'
+          })
+        }), 'Trainspotting', 'voter1')
+      ).to.equal(
+        Map({
+          round: 1,
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 4,
+            '28 Days Later': 1
+          }),
+          votes: Map({
+            voter1: 'Trainspotting'
           })
         })
       );
