@@ -10,7 +10,7 @@ export function setEntries(state, entries) {
 
 function getWinners(vote) {
   if (!vote) return [];
-  const [one, two] = vote.get('pair');
+  const [one, two] = vote.get('pair').toJS();
   const oneVotes = vote.getIn(['tally', one], 0);
   const twoVotes = vote.getIn(['tally', two], 0);
   if      (oneVotes > twoVotes)  return [one];
